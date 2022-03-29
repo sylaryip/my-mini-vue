@@ -1,13 +1,16 @@
 import { describe, it, expect, vi } from 'vitest';
-import { readonly } from '../reactive';
+import { isReadonly, readonly } from '../reactive';
 
 describe('readonly', () => {
   it('happy path', () => {
     // not set
     const original = { foo: 1, bar: { baz: 2 } };
-    const wrapper = readonly(original);
-    expect(wrapper).not.toBe(original);
-    expect(wrapper.foo).toBe(1);
+    const wrapped = readonly(original);
+    expect(wrapped).not.toBe(original);
+    expect(wrapped.foo).toBe(1);
+
+    expect(isReadonly(wrapped)).toBe(true);
+    expect(isReadonly(original)).toBe(false);
   });
 
   it('warn where call set', () => {
