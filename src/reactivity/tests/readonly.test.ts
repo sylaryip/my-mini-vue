@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { isReadonly, readonly } from '../reactive';
+import { isReadonly, readonly, isProxy } from '../reactive';
 
 describe('readonly', () => {
   it('happy path', () => {
@@ -14,6 +14,8 @@ describe('readonly', () => {
 
     expect(isReadonly(wrapped.bar)).toBe(true);
     expect(isReadonly(original.bar)).toBe(false);
+  
+    expect(isProxy(wrapped)).toBe(true);
   });
 
   it('warn where call set', () => {
