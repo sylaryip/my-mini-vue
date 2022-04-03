@@ -58,14 +58,18 @@ export function track(target, key) {
     depsMap.set(key, dep);
   }
 
-  // 已经在 dep 中
+  trackEffect(dep);
+}
+
+export function trackEffect(dep) {
+  // 看盾 dep 之前有没能有添加过，添加过就不添加
   if (dep.has(activeEffect)) return;
 
   dep.add(activeEffect);
   activeEffect.deps.push(dep);
 }
 
-function isTracking() {
+export function isTracking() {
   return shouldTrack && activeEffect !== undefined;
 }
 
@@ -73,6 +77,10 @@ export function trigger(target, key) {
   const depsMap = targetMap.get(target);
   const dep = depsMap.get(key);
 
+  triggerEffect(dep);
+}
+
+export function triggerEffect(dep) {
   for (const effect of dep) {
     if (effect.scheduler) {
       effect.scheduler();
