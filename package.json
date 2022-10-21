@@ -4,9 +4,13 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "test": "vitest"
+    "test": "vitest",
+    "build": "rollup -c rollup.config.mjs"
   },
   "devDependencies": {
+    "@rollup/plugin-typescript": "^9.0.1",
+    "rollup": "^3.2.3",
+    "tslib": "^2.4.0",
     "typescript": "^4.6.3",
     "vitest": "^0.7.12"
   }
