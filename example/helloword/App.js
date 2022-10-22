@@ -1,13 +1,12 @@
 import { h } from "../../lib/my-mini-vue.esm.js";
 
-window.self = null;
 export const App = {
     render() {
-        window.self = this;
-        return h('div', { class: 'mini-vue' },
+        return h('div', { class: 'root' },
             [
-                h('p', { class: "red" }, "hi"),
-                h('p', { class: "blue" }, this.msg),
+                h('span', { class: "red" }, 'hi'),
+                h('span', null, ' '),
+                h('span', { class: "blue" }, this.msg),
             ],
         );
     },
