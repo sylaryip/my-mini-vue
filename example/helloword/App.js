@@ -9,13 +9,15 @@ export const App = {
             {
                 id: 'root',
                 class: 'root',
-                onClick: () => console.log('click'),
+
             },
             [
-                h('span', { class: "red" }, 'hi'),
-                h('span', null, ' '),
-                h('span', { class: "blue" }, this.msg,),
-                h(Foo, { count: 1 })
+                h(Foo, {
+                    count: 1,
+                    onAdd(result) {
+                        console.log("onAdd", result);
+                    },
+                })
             ],
         );
     },
