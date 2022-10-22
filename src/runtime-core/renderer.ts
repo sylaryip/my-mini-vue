@@ -41,13 +41,22 @@ function mountElement(vnode: any, container: any) {
   const el = (vnode.el = document.createElement(vnode.type));
   const { props, children, shapeFlags } = vnode;
 
+  // children
   if (shapeFlags & ShapeFlags.TEXT_CHILDREN) {
     el.textContent = vnode.children;
   } else if (shapeFlags & ShapeFlags.ARRAY_CHILDREN) {
     mountChildren(vnode, el);
   }
+
+  // props
   for (const key in props) {
     const val = props[key];
+
+    const isOn = (key: string) => /^on[A-Z]/.test(key);
+    if (isOn(key)) {
+      const event = key.slice(2).toLocaleLowerCase();
+      el.addEventListener(event, val);
+    }
     el.setAttribute(key, val);
   }
 
