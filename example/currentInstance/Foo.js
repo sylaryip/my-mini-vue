@@ -1,9 +1,10 @@
-import { h, renderSlots, getCurrentInstance } from "../../lib/my-mini-vue.esm.js";
+import { h, renderSlots, getCurrentInstance, inject } from "../../lib/my-mini-vue.esm.js";
 
 export const Foo = {
     setup() {
         const instance = getCurrentInstance();
-        console.log('Foo: ', instance);
+        console.log('Foo:', instance);
+        console.log('inject:', inject('foo'));
     },
     render() {
         const foo = h('p', {}, 'foo');
